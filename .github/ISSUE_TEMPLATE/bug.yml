@@ -1,0 +1,40 @@
+name: Что-то сломалось
+description: Ошибка в игре, на сайте или в приложении
+title: "Ошибка: "
+labels: [ошибка]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Что случилось
+      description: Что вы делали и что пошло не так.
+      placeholder: Нажал «Реванш», а партия не началась…
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Где играли
+      options:
+        - Сайт на телефоне
+        - Сайт на компьютере
+        - Установленная с сайта версия (PWA)
+        - Приложение для Android
+        - Приложение для Windows
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Режим
+      options: [Против компьютера, Вдвоём, Онлайн, Не в партии]
+  - type: input
+    id: device
+    attributes:
+      label: Устройство и браузер
+      placeholder: Pixel 7, Chrome
+  - type: textarea
+    id: screen
+    attributes:
+      label: Скриншот
+      description: Перетащите картинку сюда, если есть.

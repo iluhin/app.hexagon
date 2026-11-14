@@ -1,0 +1,17 @@
+name: Идея
+description: Предложить новую возможность или улучшение
+title: "Идея: "
+labels: [идея]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Что хочется
+      placeholder: Таймер на ход в онлайне…
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Зачем
+      description: Какую задачу это решит.

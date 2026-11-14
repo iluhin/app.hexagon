@@ -1,0 +1,45 @@
+# Публикация выпуска одной кнопкой.
+#
+# Actions → «Выпуск» → Run workflow → версия (например, 1.0.0).
+# Текст выпуска берётся из releases/v<версия>.md, файлы — из files/v<версия>/
+# (APK, EXE), если папка есть. Повторный запуск обновляет текст и файлы.
+name: Выпуск
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Версия, например 1.0.0'
+        required: true
+      title:
+        description: 'Заголовок (пусто — «Гексагон <версия>»)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Опубликовать
+        env:
+          GH_TOKEN: ${{ github.token }}
+          V: ${{ inputs.version }}
+          TITLE: ${{ inputs.title }}
+        run: |
+          NOTES="releases/v$V.md"
+          [ -f "$NOTES" ] || { echo "нет файла $NOTES"; exit 1; }
+          TITLE="${TITLE:-Гексагон $V}"
+          FILES=()
+          [ -d "files/v$V" ] && for f in files/v$V/*; do FILES+=("$f"); done
+          if gh release view "v$V" >/dev/null 2>&1; then
+            gh release edit "v$V" --title "$TITLE" --notes-file "$NOTES" --latest
+            [ ${#FILES[@]} -gt 0 ] && gh release upload "v$V" "${FILES[@]}" --clobber
+          else
+            gh release create "v$V" --title "$TITLE" --notes-file "$NOTES" --target "$GITHUB_SHA" --latest "${FILES[@]}"
+          fi
+          echo "готово: https://github.com/${{ github.repository }}/releases/tag/v$V"
