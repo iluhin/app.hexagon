@@ -3,7 +3,7 @@
 Стратегия на шестиугольном поле: клонируй фишки, прыгай через клетку и
 перекрашивай соперника.
 
-**[▶ Играть](https://hexagon.iluh.in/)**
+**[▶ Играть](https://hexagon.iluh.in/)** · **[⬇ Android и Windows](https://hexagon.iluh.in/download)**
 
 ## Разделы
 
