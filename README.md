@@ -1,3 +1,5 @@
+**Русский** · [English](README.en.md) · [Español](README.es.md) · [简体中文](README.zh-CN.md)
+
 <div align="center">
 
 <img src="cover.jpg" alt="Гексагон — захвати поле, перекрась всё" width="100%">
